@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Homeschool Helps</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="js/register.js"></script>
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container">
+<h1>Registration Form</h1>
+<p>Use tab keys to move from one input field to the next.</p>
+<form action="register.php" method="post" id="form" name='register' onsubmit="return formValidation();">
+<fieldset>
+<div class="form-group">
+<ul>
+
+        <li><input class="form-control" placeholder="Username" type="text" name="username" size="12" /></li>
+        <li><input class="form-control" placeholder="Password" type="password" name="passid" size="12" /></li>
+        <li><input class="form-control" type="password" placeholder="Confirm Password" name="cpassid" size="12" /></li>
+        <li><input class="form-control" type="text" placeholder="Name" name="name" size="50" /></li>
+        <li><input class="form-control" type="text" placeholder="City" name="city" size="50" /></li>
+        <li><input class="form-control" type="text" placeholder="State" name="state" size="50" /></li>
+        <li><input class="form-control" placeholder="Zip Code" type="text" name="zip" /></li>
+        <li><input class="form-control" placeholder="Email" type="text" name="email" size="50" /></li>
+        <li><textarea class="form-control" placeholder="About" name="descr" id="descr"></textarea></li>
+        <input type="submit" name="submit" value="Submit" />
+    </ul>
+    </div>
+    </fieldset>
+</form>
+</div>
+    </div>
+<!-- placed at the end of the document so that the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

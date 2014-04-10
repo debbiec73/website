@@ -1,29 +1,37 @@
 function formValidation()
 {
-    var uid = document.registration.username;
-    var passid = document.registration.passid;
-    var uname = document.registration.name;
-    var ucity = document.registration.city;
-    var ustate = document.registration.state;
-    var uzip = document.registration.zip;
-    var uemail = document.registration.email;
-    var umsex = document.registration.msex;
-    var ufsex = document.registration.fsex; if(username_validation(uid,5,12))
+    var uid = document.register.username;
+    var passid = document.register.passid;
+    var cpassid = document.register.cpassid;
+    var uname = document.register.name;
+    var ucity = document.register.city;
+    var ustate = document.register.state;
+    var uzip = document.register.zip;
+    var uemail = document.register.email;
+    var udescr = document.register.descr;
+    //var umsex = document.register.male;
+    //var ufsex = document.register.female;
+
+    if(username_validation(uid,5,12))
 {
     if(passid_validation(passid,7,12))
     {
-        if(allLetter(uname))
+        if(compare_valid(passid, cpassid))
         {
-            if(alphanumeric(ucity))
+            if(allLetter(uname))
             {
-                if(allLetters(ustate))
+                if(alpha(ucity))
                 {
-                    if(allnumeric(uzip))
+                    if(allLetters(ustate))
                     {
-                        if(ValidateEmail(uemail))
+                        if(allnumeric(uzip))
                         {
-                            if(validsex(umsex,ufsex))
+                            if(ValidateEmail(uemail))
                             {
+                                if(ValidateDescr(udescr))
+                                {
+
+                                }
                             }
                         }
                     }
@@ -32,14 +40,20 @@ function formValidation()
         }
     }
 }
+
     return false;
 
-} function username_validation(uid,mx,my)
+
+}
+
+
+
+function username_validation(uid,mx,my)
 {
     var uid_len = uid.value.length;
     if (uid_len == 0 || uid_len >= my || uid_len < mx)
     {
-        alert("User Id should not be empty / length be between "+mx+" to "+my);
+        alert("Username should not be empty / length be between "+mx+" to "+my);
         uid.focus();
         return false;
     }
@@ -56,6 +70,30 @@ function passid_validation(passid,mx,my)
     }
     return true;
 }
+function compare_valid(passid, cpassid) {
+
+    var fld_val;
+    fld_val = passid.value;
+
+    var fld2_val;
+    fld2_val = cpassid.value;
+
+    if (fld_val == fld2_val)
+    {
+
+        return true;
+
+    }
+    else
+    {
+
+        alert('Passwords do not match please try again');
+        passid.focus();
+        return false;
+
+    }
+}
+
 function allLetter(uname)
 {
     var letters = /^[A-Za-z]+$/;
@@ -65,21 +103,22 @@ function allLetter(uname)
     }
     else
     {
-        alert('Username must have alphabet characters only');
+        alert('Name must have alphabet characters only');
         uname.focus();
         return false;
     }
 }
-function alphanumeric(ucity)
+function alpha(ucity)
 {
-    var letters = /^[0-9a-zA-Z]+$/;
+    var letters;
+    letters = /^[A-Za-z0-9.\s]+$/;
     if(ucity.value.match(letters))
     {
         return true;
     }
     else
     {
-        alert('User address must have alphanumeric characters only');
+        alert('User city must have alphanumeric characters only');
         ucity.focus();
         return false;
     }
@@ -112,50 +151,42 @@ function allnumeric(uzip)
         return false;
     }
 }
+/**
+ * @return {boolean}
+ */
 function ValidateEmail(uemail)
 {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(uemail.value.match(mailformat))
+
+        //var x=document.forms["resister"]["email"].value;
+        var x=uemail.value;
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
     {
-        return true;
-    }
-    else
-    {
-        alert("You have entered an invalid email address!");
+        alert("Not a valid e-mail address");
+        uemail.focus();
         return false;
     }
-} function validsex(umsex,ufsex)
-{
-    x=0;
-
-    if(umsex.checked)
-    {
-        x++;
-    }
-    if(ufsex.checked)
-    {
-        x++;
-    }
-
-    if (x==2)
-    {
-        alert('Both Male/Female are checked');
-        ufsex.checked=false
-        umsex.checked=false
-        umsex.focus();
-        return false;
-    }
-
-    if(x==0)
-    {
-        alert('Select Male/Female');
-        umsex.focus();
-        return false;
-    }
-    else
-    {
-        alert('Form Succesfully Submitted');
-        window.location.reload()
+        else {
         return true;
     }
 }
+
+/*function ValidateDescr(udescr)
+{
+    var letters = /^[A-Za-z0-9.\s]+$/;
+    if(udescr.value.match(letters))
+    {
+        return true;
+    }
+    else
+    {
+        alert("Please tell us a little about yourself");
+        udescr.focus();
+        return false;
+    }
+}*/
+
+
+
+
